@@ -87,8 +87,6 @@ body
 {
     width: 210px;
     height: 30px;
-    justify-content: center;
-    align-items: top;
     flex-direction: row;
     display: flex;
 }

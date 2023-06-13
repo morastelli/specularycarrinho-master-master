@@ -1,5 +1,18 @@
 <?php
+    include("conecta.php");
 
+    $comando = $pdo->prepare("SELECT * FROM produtos");
+    $resultado = $comando->execute();
+    
+    while ($linhas = $comando->fetch() )
+    {
+        $nome = $linhas["nome"]; 
+        $preco = $linhas["preco"]; 
+        $qtd = $linhas["quantidade"];
+        $img = $linhas["imagem"];
+        $final= $preco * $qtd;
+        $total = number_format($final, 2, ',', ' ');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -25,18 +38,17 @@
      
      <!--PRODUTOS-->
      <div class="prot">
-        <div name="imagem" id="imagem" class="imagem"><img class="armacao" scale="10%" src="armacaovermelha.png"></div>
+        <div name="imagem" id="imagem" class="imagem"><?php echo($img) ?></div>
         <div class="resto">
             <div class="texto">
-                <h4 name="nome" id="nome">Armação Vermelha</h4>
-                <h5 name="preco" id="preco">R$50,00</h5>
+                <h4 name="nome" id="nome"><?php echo($nome) ?></h4>
+                <h5 name="preco" id="preco">R$<?php echo($preco)?></h5>
             </div>
             <div class="addremove">
                 <button id="btn_decrementar" type="button" class="remove">-</button>
                 <p name="quantidade" class="number" id="contador">1</p>
                 <button id="btn_incrementar" type="button" class="add">+</button>
             </div>
-            Armação Vermelha Unisex
         </div>
      </Div>
      
@@ -68,10 +80,6 @@ btnDecrementar.addEventListener("click", function()
     if (contador <= 0)
     {
         window.confirm("Deseja remover o item do carrinho?")
-    }
-    else
-    {
-
     }
 })
 

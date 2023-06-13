@@ -11,21 +11,18 @@
     {
     $comando = $pdo->prepare("INSERT INTO produtos VALUES($id_produto,'$nome',$quantidade,$preco)" );
     $resultado = $comando->execute();
-    header("Location: carrinho.php");
     }
 
     if(isset ($_POST["excluir"]))
     {
     $comando = $pdo->prepare("DELETE FROM produtos WHERE id_produto=$id_produto" );
     $resultado = $comando->execute();
-    header("Location: carrinho.php");
     }
 
     if(isset ($_POST["alterar"]))
     {
     $comando = $pdo->prepare("UPDATE produtos SET nome='$nome', quantidade=$quantidade WHERE id_produto=$id_produto" );
     $resultado = $comando->execute();
-    header("Location: carrinho.php");
     }
 
     if(isset ($_POST["listar"]))
@@ -41,6 +38,6 @@
         $q = $linhas["quantidade"];
         echo("$m $n $i <br> <br>");
     }
-}
+    }   
 
 ?>
